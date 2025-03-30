@@ -1,0 +1,48 @@
+# Copyright IBM Corp. All Rights Reserved.
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+version: '3.7'
+services:
+  peer0.fabricante.example.com:
+    container_name: peer0.fabricante.example.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.fabricante.example.com
+      - CORE_PEER_LOCALMSPID=FabricanteMSP
+      - CORE_PEER_ADDRESS=peer0.fabricante.example.com:7051
+    volumes:
+      - ../organizations/peerOrganizations/fabricante.example.com/peers/peer0.fabricante.example.com:/var/hyperledger/production
+    ports:
+      - "7051:7051"
+
+  peer0.transportista.example.com:
+    container_name: peer0.transportista.example.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.transportista.example.com
+      - CORE_PEER_LOCALMSPID=TransportistaMSP
+      - CORE_PEER_ADDRESS=peer0.transportista.example.com:9051
+    volumes:
+      - ../organizations/peerOrganizations/transportista.example.com/peers/peer0.transportista.example.com:/var/hyperledger/production
+    ports:
+      - "9051:9051"
+
+  peer0.distribuidor.example.com:
+    container_name: peer0.distribuidor.example.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.distribuidor.example.com
+      - CORE_PEER_LOCALMSPID=DistribuidorMSP
+      - CORE_PEER_ADDRESS=peer0.distribuidor.example.com:11051
+    volumes:
+      - ../organizations/peerOrganizations/distribuidor.example.com/peers/peer0.distribuidor.example.com:/var/hyperledger/production
+    ports:
+      - "11051:11051"
